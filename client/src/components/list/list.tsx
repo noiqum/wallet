@@ -10,6 +10,7 @@ const List: React.FC<{ expenses: expenseType[] }> = ({ expenses }) => {
     const [listCategory, setListCategory] = React.useState(false);
     const [listFrequency, setListFrequency] = React.useState(false);
     const [expenseList, setExpenseList] = React.useState<expenseType[]>();
+    const [searchKey, setSearchKey] = React.useState<string>('Search by Name');
 
     React.useEffect(() => {
         setExpenseList(expenses);
@@ -34,6 +35,17 @@ const List: React.FC<{ expenses: expenseType[] }> = ({ expenses }) => {
             return expense.frequency === e.currentTarget.value ? expense : null;
         });
         setExpenseList(newList);
+    };
+    const filterByName = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setSearchKey(e.target.value);
+        if (searchKey.length >= 2) {
+            const newList = expenseList.filter((expense) => {
+                return expense.name.includes(searchKey);
+            });
+            setExpenseList(newList);
+        } else {
+            setExpenseList(expenses);
+        }
     };
     return (
         <div className="list">
@@ -109,7 +121,18 @@ const List: React.FC<{ expenses: expenseType[] }> = ({ expenses }) => {
                         )}
                     </div>
                     <div>
-                        <input type="text" name="search" value="search" />
+                        <input
+                            type="text"
+                            name="search"
+                            value={searchKey}
+                            onFocus={() => {
+                                setSearchKey('');
+                            }}
+                            onChange={filterByName}
+                            onMouseLeave={() => {
+                                setSearchKey('search by name');
+                            }}
+                        />
                         <img src={Search} alt="search_icon" id="search" />
                     </div>
                 </div>
