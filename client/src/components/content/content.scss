@@ -1,0 +1,13 @@
+@import '../../variables.scss';
+
+.content {
+    display: flex;
+    align-self: flex-start;
+    flex-direction: column;
+    width: 85%;
+    height: 90%;
+    min-height: 90%;
+    padding: 3rem;
+    position: relative;
+    background-color: $navy;
+}

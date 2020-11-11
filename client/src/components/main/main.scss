@@ -1,0 +1,15 @@
+@import '../../variables.scss';
+
+.main {
+    box-sizing: border-box;
+    width: 90%;
+    height: 90%;
+
+    &__body {
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        width: 100%;
+        height: 100%;
+    }
+}

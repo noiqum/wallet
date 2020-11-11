@@ -1,0 +1,75 @@
+@import '../../variables.scss';
+
+.side {
+    display: none;
+    @media screen and (min-width: 1000px) {
+        display: flex;
+        width: 15%;
+        justify-content: space-between;
+        align-items: center;
+        align-self: stretch;
+        flex-direction: column;
+        flex-wrap: nowrap;
+        background-color: $navy;
+        height: 85%;
+        min-height: 90%;
+
+        border-bottom-left-radius: 10px;
+        &__img {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            height: 30%;
+            min-height: 30%;
+            & > p {
+                font-size: 1.2rem;
+                & > span {
+                    font-size: 1.3rem;
+                    font-weight: 600;
+                    text-transform: capitalize;
+                }
+            }
+
+            & > img {
+                display: inline-block;
+                width: 100px;
+                height: 100px;
+            }
+        }
+        &__links {
+            width: 100%;
+            height: 70%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 70%;
+            & > div {
+                align-self: stretch;
+                border: 1px solid $blue;
+                display: flex;
+                justify-content: flex-start;
+                align-items: center;
+                margin: 1rem;
+                font-size: 1.2rem;
+                padding: 2px 3px;
+                border-radius: 3px;
+                cursor: pointer;
+                @media screen and(max-width:1300px) {
+                    font-size: 0.8rem;
+                }
+                & > img {
+                    display: inline-block;
+                    width: 20px;
+                    height: 20px;
+                    margin-right: 1rem;
+                    & > svg {
+                        width: 100%;
+                        height: 100%;
+                    }
+                }
+            }
+        }
+    }
+}
