@@ -8,6 +8,7 @@ import Login from './components/auth/login';
 import SignUp from './components/auth/signup';
 import Report from './components/report/Report';
 import Logout from './components/auth/logout';
+import Expenses from './components/expense/expense';
 
 ReactDOM.render(
     <Router>
@@ -18,6 +19,7 @@ ReactDOM.render(
                 <Route path="/signup" component={SignUp}></Route>
                 <Route path="/report" component={Report} />
                 <Route path="/logout" component={Logout} />
+                <Route path="/expenses" component={Expenses} />
                 <Route component={App}></Route>
             </Switch>
         </UserProvider>

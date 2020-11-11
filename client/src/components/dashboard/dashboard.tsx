@@ -19,14 +19,14 @@ const Dashboard: React.FC = () => {
                 <div>
                     <div className="dashboard__blocks__header">
                         <span>Expenses</span>
-                        <img src={Arrow} alt="arrow_icon" />
+                        <img src={Arrow} alt="arrow_icon" onClick={() => history.push('/expenses')} />
                     </div>
                     <div>rest</div>
                 </div>
                 <div>
                     <div className="dashboard__blocks__header">
                         <span>Bills</span>
-                        <img src={Arrow} alt="arrow_icon" />
+                        <img src={Arrow} alt="arrow_icon" onClick={() => history.push('/bills')} />
                     </div>
                     <div className="dashboard__blocks__main">
                         <div className="dashboard__blocks__main-add">
