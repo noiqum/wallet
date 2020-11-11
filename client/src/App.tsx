@@ -1,10 +1,10 @@
 import * as React from 'react';
-import Logout from './components/auth/logout';
+
 import axios from 'axios';
 import Main from './components/main/main';
 import { userContext } from './store/context/userContext';
 import { Redirect } from 'react-router-dom';
-import { LoaderOptionsPlugin } from 'webpack';
+
 type props = {
     name: string;
 };
@@ -35,7 +35,7 @@ function App({ name }: props): JSX.Element {
                     setLogin(true);
                 })
                 .catch((err) => console.log(err));
-        } else if (localStorage.getItem('token') !== '') {
+        } else if (localStorage.getItem('token') !== null) {
             const token = localStorage.getItem('token');
             check(token)
                 .then((res) => {
