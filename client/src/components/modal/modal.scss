@@ -24,6 +24,12 @@
             color: red;
         }
     }
+    & > span:nth-child(1) {
+        align-self: flex-start;
+        border-bottom: unset;
+        cursor: unset;
+        color: red;
+    }
     & > form > div {
         display: flex;
         width: 100%;
@@ -49,5 +55,8 @@
         border-radius: 5px;
         color: $dark-bg;
         text-transform: uppercase;
+        &:active {
+            transform: translateY(3px);
+        }
     }
 }

@@ -57,12 +57,40 @@ export const inputValidate = (value: string, name: string): TypeValidate => {
     }
 };
 
-export const valueExistanceValidate=(name:string,value:number | string):{field:string,valid:boolean}=>{
+type TypeModalFormData={
+    name:string,
+    category:string,
+    price:number,
+    frequency:string,
+    date:string
+}
 
-    if(name === 'name'|| name === 'date' || name === 'frequency'){
-       return  value !== '' || null ? {field:name,valid:true} : {field:name ,valid :false}
+export const modalFormValidate=(data:TypeModalFormData):{field:string,msg:string}=>{
+    const result={field:'all',msg:'done'}
+    if(data.name === ''){
+        result.field='name';
+        result.msg='name is required'
+        return result;
+    }else if(data.category === ''){
+        result.msg='chose a category';
+        result.field='category';
+        return result;
+    }else if(data.frequency === ''){
+        result.field='frequency';
+        result.msg='chose a frequency';
+        return result;
+    }else if(data.date === ''){
+        result.msg='date is required';
+        result.field='date';
+        return result;
+    }else if(data.price <= 0 ){
+        data.price ===0 ? result.msg='enter a price' : result.msg="price can't be negative";
+        result.field='price';
+        return result;
+
+    }else{
+        return result
     }
-    if(name=== 'price'){
-        return value > 0 ? {field:name,valid:true} : {field:name,valid:false}
-    }
+    
+    
 }

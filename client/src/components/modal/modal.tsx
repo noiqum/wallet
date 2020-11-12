@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { valueExistanceValidate } from '../../utils/utils';
+import { modalFormValidate } from '../../utils/utils';
 import axios from 'axios';
 import { userContext } from '../../store/context/userContext';
 type TypeExpenseData = {
@@ -11,11 +11,8 @@ type TypeExpenseData = {
     user: string;
 };
 type TypeFormError = {
-    name: string | null;
-    price: number | null;
-    date: string | null;
-    frequency: string | null;
-    category: string | null;
+    field: string | null;
+    msg: string | null;
 };
 
 const Modal: React.FC<{ mood: string; close: () => void }> = ({ mood, close }) => {
@@ -28,11 +25,8 @@ const Modal: React.FC<{ mood: string; close: () => void }> = ({ mood, close }) =
         category: '',
     });
     const [error, setError] = React.useState<TypeFormError>({
-        name: null,
-        price: null,
-        frequency: null,
-        date: null,
-        category: null,
+        field: null,
+        msg: null,
     });
     const { state, dispatch } = React.useContext(userContext);
     const changeInputHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -47,25 +41,38 @@ const Modal: React.FC<{ mood: string; close: () => void }> = ({ mood, close }) =
             [e.target.name]: e.target.value,
         });
     };
+    const checkFormData = (data: TypeExpenseData) => {
+        let checkResult = modalFormValidate(data);
+        if (checkResult.msg === 'done') {
+            setError({ field: null, msg: null });
+        } else {
+            setError(checkResult);
+        }
+    };
 
     const submitHandler = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-
-        const expense = { ...data, user: state.user.id };
-        axios
-            .post('http://localhost:8000/api/expense/', expense, { headers: { 'x-auth-token': state.user.token } })
-            .then((res) => {
-                dispatch({
-                    type: 'ADD_EXPENSE',
-                    expense: res.data,
-                });
-                close();
-            })
-            .catch((err) => console.log(err.response));
-        return;
+        checkFormData(data);
+        if (!error.msg) {
+            console.log(error.msg);
+            const expense = { ...data, user: state.user.id };
+            axios
+                .post('http://localhost:8000/api/expense/', expense, { headers: { 'x-auth-token': state.user.token } })
+                .then((res) => {
+                    dispatch({
+                        type: 'ADD_EXPENSE',
+                        expense: res.data,
+                    });
+                    close();
+                })
+                .catch((err) => console.log(err.response));
+        } else {
+            return;
+        }
     };
     return (
         <div className={'modal' + ' ' + mood}>
+            <span>{error.msg}</span>
             <span
                 onClick={() => {
                     close();
@@ -77,18 +84,12 @@ const Modal: React.FC<{ mood: string; close: () => void }> = ({ mood, close }) =
             <form onSubmit={submitHandler}>
                 <div>
                     <label htmlFor="name">Name</label>
-                    <input
-                        type="text"
-                        name="name"
-                        value={data.name}
-                        onChange={changeInputHandler}
-                        className={error.name ? 'error' : ''}
-                    />
+                    <input type="text" name="name" value={data.name} onChange={changeInputHandler} />
                 </div>
                 <div>
                     <label htmlFor="category">category</label>
                     <select name="category" id="category" onChange={changeSelectHandler}>
-                        <option value=" " selected>
+                        <option value="" selected>
                             Pick an option
                         </option>
                         <option value="house">house</option>
@@ -108,7 +109,7 @@ const Modal: React.FC<{ mood: string; close: () => void }> = ({ mood, close }) =
                 <div>
                     <label htmlFor="frequency">Frequency</label>
                     <select name="frequency" id="frequency" onChange={changeSelectHandler}>
-                        <option value=" " selected>
+                        <option value="" selected>
                             Pick an option
                         </option>
                         <option value="once">Once</option>
