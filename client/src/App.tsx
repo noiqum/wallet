@@ -16,9 +16,12 @@ function App({ name }: props): JSX.Element {
         const result = await axios
             .post('http://localhost:8000/api/user/verify', { token })
             .then((res) => {
+                if (res.data.name === 'TokenExpiredError') {
+                    setRedirect(true);
+                }
                 return res.data;
             })
-            .catch((err) => console.log(err));
+            .catch((err) => console.log('check-err', err));
         return result;
     };
     const getUser = async (id: string) => {
@@ -52,7 +55,7 @@ function App({ name }: props): JSX.Element {
                         setLogin(true);
                     });
                 })
-                .catch((err) => console.log(err));
+                .catch((err) => console.log('token-local', err));
         } else {
             setRedirect(true);
         }
