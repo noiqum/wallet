@@ -16,7 +16,12 @@ type TypeFormError = {
     msg: string | null;
 };
 
-const Modal: React.FC<{ mood: string; close: () => void }> = ({ mood, close }) => {
+const Modal: React.FC<{ mood: string; close: () => void; dataFromParent?: TypeExpenseData; id?: string }> = ({
+    mood,
+    close,
+    dataFromParent,
+    id,
+}) => {
     const [data, setData] = React.useState<TypeExpenseData>({
         name: '',
         price: 0,
@@ -30,6 +35,12 @@ const Modal: React.FC<{ mood: string; close: () => void }> = ({ mood, close }) =
         msg: null,
     });
     const { state, dispatch } = React.useContext(userContext);
+
+    React.useEffect(() => {
+        if (dataFromParent) {
+            setData({ ...dataFromParent });
+        }
+    }, []);
     const changeInputHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
         setData({
             ...data,
@@ -56,23 +67,39 @@ const Modal: React.FC<{ mood: string; close: () => void }> = ({ mood, close }) =
         checkFormData(data);
         if (!error.msg) {
             console.log(error.msg);
-            const expense = { ...data, user: state.user.id };
-            axios
-                .post('http://localhost:8000/api/expense/', expense, { headers: { 'x-auth-token': state.user.token } })
-                .then((res) => {
-                    dispatch({
-                        type: 'ADD_EXPENSE',
-                        expense: res.data,
-                    });
-                    close();
-                })
-                .catch((err) => console.log(err.response));
+            if (mood === 'Add Expense') {
+                const expense = { ...data, user: state.user.id };
+                axios
+                    .post('http://localhost:8000/api/expense/', expense, {
+                        headers: { 'x-auth-token': state.user.token },
+                    })
+                    .then((res) => {
+                        dispatch({
+                            type: 'ADD_EXPENSE',
+                            expense: res.data,
+                        });
+                        close();
+                    })
+                    .catch((err) => console.log(err.response));
+            } else if (mood === 'Update') {
+                axios
+                    .post(
+                        'http://localhost:8000/api/expense/update/' + id,
+                        { id, expense: data },
+                        { headers: { 'x-auth-token': state.user.token } },
+                    )
+                    .then((res) => {
+                        console.log(res);
+                        close();
+                    })
+                    .catch((err) => console.log(err));
+            }
         } else {
             return;
         }
     };
     return (
-        <div className={'modal' + ' ' + mood}>
+        <div className="modal">
             <span>{error.msg}</span>
             <span
                 onClick={() => {
@@ -81,7 +108,7 @@ const Modal: React.FC<{ mood: string; close: () => void }> = ({ mood, close }) =
             >
                 close
             </span>
-            <h2>Add Expense</h2>
+            <h2>{mood}</h2>
             <form onSubmit={submitHandler}>
                 <div>
                     <label htmlFor="name">Name</label>
@@ -129,7 +156,7 @@ const Modal: React.FC<{ mood: string; close: () => void }> = ({ mood, close }) =
                     <label htmlFor="date">Purchase Date</label>
                     <input type="date" name="date" id="date" value={data.date} onChange={changeInputHandler} />
                 </div>
-                <input type="submit" value="Add Expense" />
+                <input type="submit" value={mood} />
             </form>
         </div>
     );

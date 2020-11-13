@@ -7,15 +7,27 @@ module.exports = {
             .catch(err => res.status(422).json(err));
 
     },
-    delete: function (req, res) {
-        Expense.findByIdAndDelete({ _id: req.body.id }, (err, response) => {
-            if (err) {
-                console.log(err)
-            }
-            res.send(response)
-        })
-            .then(res => res.json(res))
-            .catch(err => res.status(422).json(err.response));
+    delete: async function (req, res) {
+        // Expense.findByIdAndDelete({ _id: req.body.id }, (err, response) => {
+        //     if (err) {
+        //         console.log(err)
+        //     }
+        //     res.send(response)
+        // })
+        //     .then(res => res.json(res))
+        //     .catch(err => res.status(422).json(err.response));
+        try {
+            Expense.deleteOne({ _id: req.body.id }, (err, response) => {
+                if (err) {
+                    console.log(err)
+                } else {
+                    res.send(response)
+                }
+            })
+
+        } catch (error) {
+            console.log(error)
+        }
     },
     findById: function (req, res) {
         Expense.findById(req.params.id)
@@ -28,6 +40,21 @@ module.exports = {
 
             res.send(docs)
         })
+    },
+    update: async function (req, res) {
+
+        try {
+            await Expense.updateOne({ _id: req.body.id }, { ...req.body.expense }, (err, docs) => {
+                if (err) {
+                    res.status(404)
+                    res.json(err)
+                }
+                res.send(docs)
+            })
+        } catch (error) {
+            console.log(error)
+        }
+
     }
 
 

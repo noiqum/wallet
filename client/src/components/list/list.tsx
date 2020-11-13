@@ -17,12 +17,14 @@ const List: React.FC<{ expenses: expenseType[] }> = ({ expenses }) => {
     const [searchKey, setSearchKey] = React.useState<string>('Search by Name');
     const [confirm, setConfirm] = React.useState<boolean>(false);
     const [selectedExpense, setSelectedExpense] = React.useState(null);
+    const [update, setUpdate] = React.useState<boolean>(false);
     const { state } = React.useContext(userContext);
     React.useEffect(() => {
         setExpenseList(expenses);
     }, [expenses]);
     const closeModal = () => {
         setAddExpense(false);
+        setUpdate(false);
     };
     const filterCategory = (e: React.MouseEvent<HTMLOptionElement>) => {
         if (e.currentTarget.value === 'none') {
@@ -68,7 +70,10 @@ const List: React.FC<{ expenses: expenseType[] }> = ({ expenses }) => {
     };
     return (
         <div className="list">
-            {addExpense && <Modal close={closeModal} mood="" />}
+            {addExpense && <Modal close={closeModal} mood="Add Expense" />}
+            {update && (
+                <Modal close={closeModal} mood="Update" dataFromParent={selectedExpense} id={selectedExpense._id} />
+            )}
             {confirm && (
                 <Confirm
                     question="Do you want to delete the expense ?"
@@ -198,7 +203,14 @@ const List: React.FC<{ expenses: expenseType[] }> = ({ expenses }) => {
                                             setConfirm(true);
                                         }}
                                     />
-                                    <img src={Edit} alt="edit_icon" />
+                                    <img
+                                        src={Edit}
+                                        alt="edit_icon"
+                                        onClick={() => {
+                                            setSelectedExpense(expense);
+                                            setUpdate(true);
+                                        }}
+                                    />
                                 </div>
                             </div>
                         );
