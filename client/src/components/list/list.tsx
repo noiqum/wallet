@@ -4,6 +4,8 @@ import Modal from '../modal/modal';
 import Triangle from '../svg/triangle.svg';
 import Search from '../svg/search.svg';
 import Plus from '../svg/plus.svg';
+import Delete from '../svg/delete.svg';
+import Edit from '../svg/edit.svg';
 
 const List: React.FC<{ expenses: expenseType[] }> = ({ expenses }) => {
     const [addExpense, setAddExpense] = React.useState<boolean>(false);
@@ -161,6 +163,10 @@ const List: React.FC<{ expenses: expenseType[] }> = ({ expenses }) => {
                                 <span>{expense.price}</span>
                                 <span>frequency</span>
                                 <span>{expense.frequency}</span>
+                                <div className="expense__buttons">
+                                    <img src={Delete} alt="delete_icon" />
+                                    <img src={Edit} alt="edit_icon" />
+                                </div>
                             </div>
                         );
                     })}

@@ -122,7 +122,7 @@
                 border-right: 1px solid $blue;
                 padding-right: 1rem;
                 font-size: 1.2rem;
-                min-width: 8rem;
+
                 margin-left: 1rem;
             }
             & > span:nth-child(odd) {
@@ -132,6 +132,18 @@
                 margin-top: -10px;
 
                 text-transform: capitalize;
+            }
+        }
+        & .expense__buttons {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            width: 100%;
+            cursor: pointer;
+            &:hover {
+                & svg {
+                    fill: whitesmoke;
+                }
             }
         }
     }
