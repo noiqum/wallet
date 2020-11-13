@@ -1,0 +1,38 @@
+@import '../../variables.scss';
+
+.confirm {
+    position: absolute;
+    top: 2rem;
+    left: 50%;
+    transform: translate(-50%);
+    background-color: $navy;
+    z-index: 100;
+    padding: 2rem;
+    border-radius: 15px;
+    border: 3px solid gray;
+    &__buttons {
+        width: 100%;
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        & > button {
+            font-size: 1rem;
+            background-color: transparent;
+            color: $blue;
+            border-radius: 15px;
+            border: 1px solid gray;
+            padding: 3px 15px;
+            margin-right: 1rem;
+        }
+        & > button:nth-child(1) {
+            &:hover {
+                color: $green;
+            }
+        }
+        & > button:nth-child(2) {
+            &:hover {
+                color: red;
+            }
+        }
+    }
+}

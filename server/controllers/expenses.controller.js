@@ -8,9 +8,14 @@ module.exports = {
 
     },
     delete: function (req, res) {
-        Expense.findByIdAndDelete({ _id: req.params.id })
+        Expense.findByIdAndDelete({ _id: req.body.id }, (err, response) => {
+            if (err) {
+                console.log(err)
+            }
+            res.send(response)
+        })
             .then(res => res.json(res))
-            .catch(err => res.status(422).json(err));
+            .catch(err => res.status(422).json(err.response));
     },
     findById: function (req, res) {
         Expense.findById(req.params.id)
@@ -20,8 +25,7 @@ module.exports = {
     find: function (req, res) {
         Expense.find({ user: req.body.user }, (err, docs) => {
             if (err) { console.log('err', err) }
-            console.log('docs', docs)
-            console.log('id', req.body.user)
+
             res.send(docs)
         })
     }

@@ -1,11 +1,13 @@
 import * as React from 'react';
-import { expenseType } from '../../store/context/userContext';
+import { expenseType, userContext } from '../../store/context/userContext';
 import Modal from '../modal/modal';
+import Confirm from '../confirm/confirm';
 import Triangle from '../svg/triangle.svg';
 import Search from '../svg/search.svg';
 import Plus from '../svg/plus.svg';
 import Delete from '../svg/delete.svg';
 import Edit from '../svg/edit.svg';
+import axios from 'axios';
 
 const List: React.FC<{ expenses: expenseType[] }> = ({ expenses }) => {
     const [addExpense, setAddExpense] = React.useState<boolean>(false);
@@ -13,7 +15,9 @@ const List: React.FC<{ expenses: expenseType[] }> = ({ expenses }) => {
     const [listFrequency, setListFrequency] = React.useState(false);
     const [expenseList, setExpenseList] = React.useState<expenseType[]>();
     const [searchKey, setSearchKey] = React.useState<string>('Search by Name');
-
+    const [confirm, setConfirm] = React.useState<boolean>(false);
+    const [selectedExpense, setSelectedExpense] = React.useState(null);
+    const { state } = React.useContext(userContext);
     React.useEffect(() => {
         setExpenseList(expenses);
     }, [expenses]);
@@ -49,9 +53,31 @@ const List: React.FC<{ expenses: expenseType[] }> = ({ expenses }) => {
             setExpenseList(expenses);
         }
     };
+    const deleteExpense = (expense?: any, token?: string): any => {
+        axios
+            .post(
+                `http://localhost:8000/api/expense/delete/${expense._id}`,
+                { id: expense._id },
+                { headers: { 'x-auth-token': token } },
+            )
+            .then((res) => {
+                console.log('deleted');
+                console.log(res);
+            })
+            .catch((err) => console.log(err.response));
+    };
     return (
         <div className="list">
             {addExpense && <Modal close={closeModal} mood="" />}
+            {confirm && (
+                <Confirm
+                    question="Do you want to delete the expense ?"
+                    close={() => {
+                        setConfirm(false);
+                    }}
+                    funcToRun={() => deleteExpense(selectedExpense, state.user.token)}
+                />
+            )}
             <div className="list__header">
                 <span>Expenses</span>
                 <div className="list__header__buttons">
@@ -164,7 +190,14 @@ const List: React.FC<{ expenses: expenseType[] }> = ({ expenses }) => {
                                 <span>frequency</span>
                                 <span>{expense.frequency}</span>
                                 <div className="expense__buttons">
-                                    <img src={Delete} alt="delete_icon" />
+                                    <img
+                                        src={Delete}
+                                        alt="delete_icon"
+                                        onClick={() => {
+                                            setSelectedExpense(expense);
+                                            setConfirm(true);
+                                        }}
+                                    />
                                     <img src={Edit} alt="edit_icon" />
                                 </div>
                             </div>

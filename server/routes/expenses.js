@@ -4,6 +4,6 @@ const authMiddleware = require('../middleware/authMiddleware')
 router.route('/').post(authMiddleware, expenseController.save)
 router.route('/:id').get(expenseController.findById)
 router.route('/list').post(authMiddleware, expenseController.find)
-router.route('/:id').post(expenseController.delete)
+router.route('/delete/:id').post(authMiddleware, expenseController.delete)
 
 module.exports = router;
