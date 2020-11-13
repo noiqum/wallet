@@ -59,4 +59,19 @@
             transform: translateY(3px);
         }
     }
+    & > form {
+        & select {
+            appearance: none;
+            background-color: transparent;
+            border: none;
+            outline: none;
+            color: peru;
+            padding: 3px 5px;
+            font-size: 1.1rem;
+            & option {
+                background-color: $navy;
+                text-transform: capitalize;
+            }
+        }
+    }
 }

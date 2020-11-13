@@ -88,19 +88,21 @@ const Modal: React.FC<{ mood: string; close: () => void }> = ({ mood, close }) =
                 </div>
                 <div>
                     <label htmlFor="category">category</label>
-                    <select name="category" id="category" onChange={changeSelectHandler}>
-                        <option value="" selected>
-                            Pick an option
-                        </option>
-                        <option value="house">house</option>
-                        <option value="utilies">utilies</option>
-                        <option value="food">food</option>
-                        <option value="transportation">transportation</option>
-                        <option value="insurance">insurance</option>
-                        <option value="household">household items</option>
-                        <option value="entertainment">entertainment</option>
-                        <option value="other">other</option>
-                    </select>
+                    <div className="custom">
+                        <select name="category" id="category" onChange={changeSelectHandler}>
+                            <option value="" selected>
+                                Pick an option
+                            </option>
+                            <option value="house">House</option>
+                            <option value="utilies">Utilies</option>
+                            <option value="food">Food</option>
+                            <option value="transportation">Transportation</option>
+                            <option value="insurance">Insurance</option>
+                            <option value="household">Household items</option>
+                            <option value="entertainment">Entertainment</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
                 </div>
                 <div>
                     <label htmlFor="price">Price</label>
@@ -108,15 +110,17 @@ const Modal: React.FC<{ mood: string; close: () => void }> = ({ mood, close }) =
                 </div>
                 <div>
                     <label htmlFor="frequency">Frequency</label>
-                    <select name="frequency" id="frequency" onChange={changeSelectHandler}>
-                        <option value="" selected>
-                            Pick an option
-                        </option>
-                        <option value="once">Once</option>
-                        <option value="weekly">Weekly</option>
-                        <option value="monthly">Monthly</option>
-                        <option value="yearly">Yearly</option>
-                    </select>
+                    <div className="custom">
+                        <select name="frequency" id="frequency" onChange={changeSelectHandler}>
+                            <option value="" selected>
+                                Pick an option
+                            </option>
+                            <option value="once">Once</option>
+                            <option value="weekly">Weekly</option>
+                            <option value="monthly">Monthly</option>
+                            <option value="yearly">Yearly</option>
+                        </select>
+                    </div>
                 </div>
                 <div>
                     <label htmlFor="date">Purchase Date</label>
