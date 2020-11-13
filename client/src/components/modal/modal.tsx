@@ -2,6 +2,7 @@ import * as React from 'react';
 import { modalFormValidate } from '../../utils/utils';
 import axios from 'axios';
 import { userContext } from '../../store/context/userContext';
+import Down from '../svg/down.svg';
 type TypeExpenseData = {
     name: string;
     price: number;
@@ -102,6 +103,7 @@ const Modal: React.FC<{ mood: string; close: () => void }> = ({ mood, close }) =
                             <option value="entertainment">Entertainment</option>
                             <option value="other">Other</option>
                         </select>
+                        <img src={Down} alt="down_icon" />
                     </div>
                 </div>
                 <div>
@@ -120,6 +122,7 @@ const Modal: React.FC<{ mood: string; close: () => void }> = ({ mood, close }) =
                             <option value="monthly">Monthly</option>
                             <option value="yearly">Yearly</option>
                         </select>
+                        <img src={Down} alt="down_icon" />
                     </div>
                 </div>
                 <div>

@@ -109,7 +109,7 @@
 
         & > div {
             display: flex;
-            justify-content: space-around;
+            justify-content: flex-start;
             align-items: flex-start;
             position: relative;
             width: 100%;
@@ -122,12 +122,15 @@
                 border-right: 1px solid $blue;
                 padding-right: 1rem;
                 font-size: 1.2rem;
+                min-width: 8rem;
+                margin-left: 1rem;
             }
             & > span:nth-child(odd) {
                 font-size: 1rem;
                 color: gray;
                 margin-right: 1rem;
                 margin-top: -10px;
+
                 text-transform: capitalize;
             }
         }
