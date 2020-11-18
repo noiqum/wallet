@@ -1,12 +1,10 @@
 import * as React from 'react';
-
 import Arrow from '../svg/arrow.svg';
 import Upload from '../svg/upload.svg';
-
 import { useHistory } from 'react-router-dom';
-
 import List from '../list/list';
 import { userContext } from '../../store/context/userContext';
+import CategoryPie from '../chart/category-pie';
 
 const Dashboard: React.FC = () => {
     const history = useHistory();
@@ -21,7 +19,7 @@ const Dashboard: React.FC = () => {
                         <span>Expenses</span>
                         <img src={Arrow} alt="arrow_icon" onClick={() => history.push('/expenses')} />
                     </div>
-                    <div>rest</div>
+                    <CategoryPie expenseList={state.expenses.expenses} />
                 </div>
                 <div>
                     <div className="dashboard__blocks__header">
