@@ -14,7 +14,7 @@ const List: React.FC<{ expenses: expenseType[] }> = ({ expenses }) => {
     const [listCategory, setListCategory] = React.useState(false);
     const [listFrequency, setListFrequency] = React.useState(false);
     const [expenseList, setExpenseList] = React.useState<expenseType[]>();
-    const [searchKey, setSearchKey] = React.useState<string>('Search by Name');
+    const [searchKey, setSearchKey] = React.useState<string>('Search');
     const [confirm, setConfirm] = React.useState<boolean>(false);
     const [selectedExpense, setSelectedExpense] = React.useState(null);
     const [update, setUpdate] = React.useState<boolean>(false);
@@ -163,7 +163,7 @@ const List: React.FC<{ expenses: expenseType[] }> = ({ expenses }) => {
                             }}
                             onChange={filterByName}
                             onMouseLeave={() => {
-                                setSearchKey('search by name');
+                                setSearchKey('search');
                             }}
                         />
                         <img src={Search} alt="search_icon" id="search" />

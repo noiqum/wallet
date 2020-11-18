@@ -8,14 +8,7 @@ module.exports = {
 
     },
     delete: async function (req, res) {
-        // Expense.findByIdAndDelete({ _id: req.body.id }, (err, response) => {
-        //     if (err) {
-        //         console.log(err)
-        //     }
-        //     res.send(response)
-        // })
-        //     .then(res => res.json(res))
-        //     .catch(err => res.status(422).json(err.response));
+
         try {
             Expense.deleteOne({ _id: req.body.id }, (err, response) => {
                 if (err) {
