@@ -19,6 +19,7 @@ const List: React.FC<{ expenses: expenseType[] }> = ({ expenses }) => {
     const [selectedExpense, setSelectedExpense] = React.useState(null);
     const [update, setUpdate] = React.useState<boolean>(false);
     const { state } = React.useContext(userContext);
+    const [burger, setBurger] = React.useState<boolean>(false);
     React.useEffect(() => {
         setExpenseList(expenses);
     }, [expenses]);
@@ -85,6 +86,7 @@ const List: React.FC<{ expenses: expenseType[] }> = ({ expenses }) => {
             )}
             <div className="list__header">
                 <span>Expenses</span>
+
                 <div className="list__header__buttons">
                     <div
                         onClick={() => {
