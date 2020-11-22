@@ -5,6 +5,7 @@ import { useHistory } from 'react-router-dom';
 import List from '../list/list';
 import { userContext } from '../../store/context/userContext';
 import CategoryPie from '../chart/category-pie';
+import TotalBar from '../chart/total-bar';
 
 const Dashboard: React.FC = () => {
     const history = useHistory();
@@ -47,6 +48,7 @@ const Dashboard: React.FC = () => {
                             alt="arrow_icon"
                         />
                     </div>
+                    <TotalBar />
                 </div>
             </div>
         </div>

@@ -1,9 +1,10 @@
 import * as React from 'react';
 import { expenseType } from '../../store/context/userContext';
 import { Pie } from 'react-chartjs-2';
+import { useWindowSize } from '../hooks/useWindowSize';
 
 const categoryPie: React.FC<{ expenseList: expenseType[] }> = ({ expenseList }) => {
-    const canvasRef = React.useRef(null);
+    const [windowSize] = React.useState(useWindowSize());
     const [category, setCategory] = React.useState({
         house: 0,
         utilies: 0,
@@ -77,10 +78,22 @@ const categoryPie: React.FC<{ expenseList: expenseType[] }> = ({ expenseList }) 
     return (
         <div className="category">
             <Pie
+                width={windowSize ? windowSize.width / 2 : 200}
                 data={chartDataset}
                 options={{
                     responsive: true,
                     rotation: 0,
+                    layout: {
+                        padding: {
+                            left: 0,
+                        },
+                    },
+                    legend: {
+                        align: 'start',
+                        labels: {
+                            boxWidth: 10,
+                        },
+                    },
                 }}
             />
         </div>

@@ -34,7 +34,7 @@ const initialState: initialStateType = {
     },
     expenses: {
         expenses: [
-            { price: 11, name: 'pc', date: '11/10/2020', id: '1', user: '11', frequency: 'once', category: 'utilies' },
+            { price: 11, name: 'pc', date: '2020-11-10', id: '1', user: '11', frequency: 'once', category: 'utilies' },
         ],
     },
 };
