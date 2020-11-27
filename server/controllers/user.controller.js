@@ -46,7 +46,11 @@ module.exports = {
             const user = await User.login(email, password);
             const token = createToken(user._id)
             res.cookie('jwt', token, { httpOnly: true, maxAge: 24 * 60 * 60 * 1000 })
-            res.status(200).json({ id: user._id, email: user.email, userName: user.userName, token })
+            if (user.bills) {
+                res.status(200).json({ id: user._id, email: user.email, userName: user.userName, token, bills: [...user.bills] })
+            } else {
+                res.status(200).json({ id: user._id, email: user.email, userName: user.userName, token })
+            }
 
         } catch (err) {
 
@@ -78,6 +82,19 @@ module.exports = {
             })
         }
 
+    },
+    addBill: async (req, res) => {
+        try {
+            User.updateOne({ _id: req.body.id }, { ...req.body.user }, (err, docs) => {
+                if (err) {
+                    res.status(404)
+                    res.json(err)
+                }
+                res.send(docs)
+            })
+        } catch (error) {
+            console.log(error)
+        }
     }
 
 }

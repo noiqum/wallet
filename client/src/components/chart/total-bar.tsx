@@ -10,7 +10,7 @@ const TotalBar: React.FC = () => {
     React.useEffect(() => {
         setChartData(getTotalMonth(state.expenses.expenses));
     }, [state.expenses.expenses]);
-    return <div className="totalbar">{chartdata && <Bar data={chartdata} />}</div>;
+    return <div className="totalbar">{chartdata && <Bar width={250} data={chartdata} />}</div>;
 };
 
 export default TotalBar;

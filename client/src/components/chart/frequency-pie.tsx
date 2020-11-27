@@ -70,7 +70,7 @@ const FrequencyPie: React.FC<{ expenseList: expenseType[] }> = ({ expenseList })
                         },
                     },
                 }}
-                width={250}
+                width={200}
             />
         </div>
     );

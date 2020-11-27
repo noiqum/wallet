@@ -22,6 +22,10 @@ const UserSchema = new Schema({
         minlength: [6, "please min 6 characters"],
         required: [true, 'Please enter a password'],
         type: String
+    },
+    bills: {
+        type: [String],
+        required: false
     }
 
 })

@@ -26,7 +26,7 @@ const Logout: React.FC<Iprops> = () => {
     return (
         <div className="logout">
             <Link to="/">Homepage</Link>
-            Goodbye {state.user.userName}
+            Goodbye
             <img src={Door} alt="door_illustration" />
         </div>
     );

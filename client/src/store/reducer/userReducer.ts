@@ -4,7 +4,8 @@ type userType={
     userName:string,
     id:string,
     email:string,
-    token:string
+    token:string,
+    bills?:string[],
 }
 
 export const userReducer=(state:userType,action:{type:string,user:{}})=>{

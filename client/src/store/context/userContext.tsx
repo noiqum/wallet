@@ -7,6 +7,7 @@ type userType = {
     id: string;
     email: string;
     token: string;
+    bills?: string[];
 };
 export type expenseType = {
     name: string;
