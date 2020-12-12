@@ -28,7 +28,12 @@ const Dashboard: React.FC = () => {
                         <img src={Arrow} alt="arrow_icon" onClick={() => history.push('/bill')} />
                     </div>
                     <div className="dashboard__blocks__main">
-                        <div className="dashboard__blocks__main-add">
+                        <div
+                            className="dashboard__blocks__main-add"
+                            onClick={() => {
+                                history.push('/bill');
+                            }}
+                        >
                             <img src={Upload} alt="upload_icon" />
                             <span>Upload Bill</span>
                         </div>
