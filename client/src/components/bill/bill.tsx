@@ -51,7 +51,12 @@ const Bill: React.FC = () => {
                     state.user.bills.map((bill, idx) => {
                         return (
                             <div key={idx}>
-                                <img src={`http://localhost:8000/bill/${bill}`} alt="bill_image" />
+                                <img
+                                    src={`http://localhost:8000/bill/${bill}`}
+                                    alt="bill_image"
+                                    width="250px"
+                                    height="200px"
+                                />
                             </div>
                         );
                     })}
