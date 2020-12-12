@@ -75,25 +75,11 @@ app.get('/bill/:filename', (req, res) => {
 
 
 });
-// app.get('/bill/:filename', (req, res) => {
-//     gfs.find({ filename: req.body.filename }, (err, file) => {
-//         // Check if file
-//         if (!file || file.length === 0) {
-//             return res.status(404).json({
-//                 err: 'No file exists',
-//             })
-//         }
 
-//         // Check if image
-//         if (file.contentType === 'image/jpeg' || file.contentType === 'image/png') {
-//             // Read output to browser
+if (process.env.NODE_ENV === 'production') {
+    app.use(express.static('client/build'));
 
-//             const readstream = gfs.createReadStream(file.filename)
-//             readstream.pipe(res)
-//         } else {
-//             res.status(404).json({
-//                 err: 'Not an image',
-//             })
-//         }
-//     })
-// })
+    app.get('*', (req, res) => {
+        res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'))
+    })
+}

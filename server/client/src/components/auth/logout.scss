@@ -1,0 +1,32 @@
+@import '../../variables.scss';
+
+.logout {
+    background-image: url('./components/png/logout.png');
+    display: flex;
+    background-repeat: no-repeat;
+    background-size: cover;
+    min-height: 100vh;
+    min-width: 100vw;
+    justify-content: center;
+    align-items: center;
+    padding: 3rem;
+    font-size: 2rem;
+    font-family: inherit;
+    @media screen and (min-width: 1000px) {
+        font-size: 3.3rem;
+    }
+    & > img {
+        width: 40%;
+        height: 50%;
+    }
+    & a {
+        text-transform: none;
+        text-decoration: none;
+        align-self: flex-start;
+        border-bottom: 3px solid #191970;
+        color: #191970;
+        letter-spacing: 3px;
+        font-weight: 600;
+        font-family: Roboto sans-serif;
+    }
+}

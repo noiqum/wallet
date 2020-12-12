@@ -1,0 +1,52 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans&display=swap');
+
+*,
+html,
+body {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-size: 36px;
+    color: peru;
+    font-family: 'Open Sans', sans-serif;
+}
+
+button {
+    border: unset;
+    background-color: unset;
+    outline: unset;
+    &:active {
+        transform: translateY(3px);
+    }
+}
+.app {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background-image: linear-gradient(to bottom, grey, white);
+    background-size: cover;
+
+    @media screen and (min-width: 1000px) {
+        width: 100vw;
+        height: 100vh;
+    }
+}
+
+@import './components/auth/auth.scss';
+@import './variables.scss';
+@import './components/auth/signup.scss';
+@import './components/header/header.scss';
+@import './components/side/side.scss';
+@import './components/main/main.scss';
+@import './components/content/content.scss';
+@import './components/dashboard/dashboard.scss';
+@import './components/modal/modal.scss';
+@import './components/list/list.scss';
+@import './components/expense/expense.scss';
+@import './components/auth/logout.scss';
+@import './components/confirm/confirm.scss';
+@import './components/bill/bill.scss';
