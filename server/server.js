@@ -60,7 +60,7 @@ app.post('/bill/', upload.single('file'), (req, res) => {
 
 app.get('/bill/:filename', (req, res) => {
     // console.log('id', req.params.id)
-    const file = gfs
+    gfs
         .find({
             filename: req.params.filename,
         })
@@ -73,9 +73,10 @@ app.get('/bill/:filename', (req, res) => {
             gfs.openDownloadStreamByName(req.params.filename).pipe(res);
         });
 
+
 });
 // app.get('/bill/:filename', (req, res) => {
-//     gfs.files.find({ filename: req.body.filename }, (err, file) => {
+//     gfs.find({ filename: req.body.filename }, (err, file) => {
 //         // Check if file
 //         if (!file || file.length === 0) {
 //             return res.status(404).json({
@@ -86,6 +87,7 @@ app.get('/bill/:filename', (req, res) => {
 //         // Check if image
 //         if (file.contentType === 'image/jpeg' || file.contentType === 'image/png') {
 //             // Read output to browser
+
 //             const readstream = gfs.createReadStream(file.filename)
 //             readstream.pipe(res)
 //         } else {

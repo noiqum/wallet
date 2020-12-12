@@ -50,6 +50,7 @@ function App({ name }: props): JSX.Element {
                                 userName: res.userName,
                                 id: res._id,
                                 token: token,
+                                bills: res.bills,
                             },
                         });
                         setLogin(true);
