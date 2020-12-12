@@ -2,7 +2,7 @@
   "name": "wallet",
   "version": "1.0.0",
   "description": "",
-  "main": "/server/server.js",
+  "main": "server.js",
   "engines": {
     "node": "14.6.0",
     "npm": "6.14.6"
